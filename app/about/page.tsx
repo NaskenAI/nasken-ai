@@ -227,6 +227,7 @@ export default function AboutPage() {
               Built by engineers who&apos;ve shipped at scale.
             </h2>
           </div>
+        </div>
       </section>
 
       {/* Recognitions */}
