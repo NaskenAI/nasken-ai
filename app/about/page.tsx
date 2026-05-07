@@ -69,24 +69,6 @@ const recognitions = [
     name: "NVIDIA Inception Program",
     description: "Member — recognising Nasken's innovation in AI.",
   },
-  {
-    name: "Massachusetts Life Sciences Center",
-    description: "Program participant — life sciences innovation recognition.",
-  },
-  {
-    name: "HIMSS",
-    description:
-      "CEO is a committee member of the Digital Health Transformation Committee.",
-  },
-  {
-    name: "AMIA",
-    description:
-      "CEO is a member of the American Medical Informatics Association.",
-  },
-  {
-    name: "IEEE",
-    description: "CEO holds Senior Member status.",
-  },
 ];
 
 export default function AboutPage() {
@@ -245,54 +227,6 @@ export default function AboutPage() {
               Built by engineers who&apos;ve shipped at scale.
             </h2>
           </div>
-
-          <div className="bg-white rounded-3xl border border-ink-100 overflow-hidden">
-            <div className="grid md:grid-cols-12 gap-0">
-              <div className="md:col-span-4 bg-gradient-to-br from-teal-500 to-teal-700 p-10 flex flex-col justify-between text-white relative overflow-hidden">
-                <div className="absolute -top-20 -right-20 w-60 h-60 bg-teal-300/20 blur-3xl rounded-full" />
-                <div className="relative">
-                  <div className="w-16 h-16 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center mb-6">
-                    <span className="font-display text-2xl font-medium">
-                      SGV
-                    </span>
-                  </div>
-                  <h3 className="font-display text-2xl font-medium tracking-tight">
-                    Sandesh Gubbi Virupaksha
-                  </h3>
-                  <p className="text-sm text-teal-100 mt-1">Founder &amp; CEO</p>
-                </div>
-                <p className="relative text-sm text-teal-50/80 mt-8 leading-relaxed">
-                  Personally mentors every cohort of interns and trainees.
-                </p>
-              </div>
-              <div className="md:col-span-8 p-10">
-                <p className="text-xs uppercase tracking-widest text-ink-500 font-semibold mb-4">
-                  Background
-                </p>
-                <ul className="space-y-3 text-sm text-ink-700">
-                  {[
-                    "M.S. Computer Engineering, UMass Amherst",
-                    "Ex-Staff Software Engineer, Meta (Facebook)",
-                    "Ex-Staff Software Engineer, Oracle",
-                    "IEEE Senior Member",
-                    "HIMSS Digital Health Transformation Committee Member",
-                    "AMIA (American Medical Informatics Association) Member",
-                    "Executive Director, Center for Responsible AI in Education (Non-profit)",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <Award
-                        size={14}
-                        className="text-teal-600 mt-1 shrink-0"
-                        strokeWidth={2.2}
-                      />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Recognitions */}
