@@ -131,11 +131,6 @@ export default function TrainingPage() {
             exposure to production-grade AI — from prompt engineering and
             generative AI to machine learning and applied healthcare AI.
           </p>
-          <p className="mt-5 text-base text-ink-500 leading-relaxed">
-            All programs are mentored by our Founder &amp; CEO Sandesh Gubbi
-            Virupaksha (ex-Meta, ex-Oracle; M.S., UMass Amherst; IEEE Senior
-            Member) and senior engineers.
-          </p>
         </div>
       </section>
 
