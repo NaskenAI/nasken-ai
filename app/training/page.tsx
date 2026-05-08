@@ -118,7 +118,7 @@ export default function TrainingPage() {
             <span className="italic text-teal-600">next generation.</span>
           </>
         }
-        description="Industry-grade AI training programs for college students and PUC students — taught by engineers from Meta, Oracle, and leading global tech companies."
+        description="Industry-grade AI training programs for college students and PUC students — taught by engineers working at leading global tech companies."
       />
 
       {/* Intro */}
