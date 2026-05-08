@@ -53,10 +53,6 @@ const focusAreas = [
 
 const recognitions = [
   "NVIDIA Inception Member",
-  "MLSC Participant",
-  "HIMSS Committee",
-  "AMIA Member",
-  "IEEE Senior Member",
 ];
 
 export default function HomePage() {
