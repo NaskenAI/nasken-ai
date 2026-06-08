@@ -37,14 +37,14 @@ export default function Footer() {
             </p>
 
             <div className="mt-6 space-y-3 text-sm">
-              <div className="flex items-start gap-3 text-ink-300">
+              {/* <div className="flex items-start gap-3 text-ink-300">
                 <MapPin size={16} className="mt-0.5 text-teal-400 shrink-0" />
                 <span>
                   #2880, Someshwara Nilaya, Saptagiri Extension,
                   <br />
                   Tumkur, Karnataka, India — 572102
                 </span>
-              </div>
+              </div> */}
               <a
                 href="mailto:info@nasken.ai"
                 className="flex items-center gap-3 text-ink-300 hover:text-teal-400 transition-colors"
