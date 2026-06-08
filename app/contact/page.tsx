@@ -376,7 +376,7 @@ export default function ContactPage() {
 
           <div className="bg-white border border-ink-100 rounded-3xl p-8 md:p-10">
             <div className="grid md:grid-cols-3 gap-8">
-              <div>
+              {/* <div>
                 <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center mb-4">
                   <MapPin size={18} className="text-teal-600" strokeWidth={1.8} />
                 </div>
@@ -392,7 +392,7 @@ export default function ContactPage() {
                   <br />
                   Karnataka, India — 572102
                 </address>
-              </div>
+              </div> */}
               <div>
                 <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center mb-4">
                   <Phone size={18} className="text-teal-600" strokeWidth={1.8} />
