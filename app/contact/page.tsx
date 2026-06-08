@@ -404,7 +404,7 @@ export default function ContactPage() {
                   href="tel:+919449335634"
                   className="text-sm text-ink-700 hover:text-teal-600 transition-colors"
                 >
-                  +91 9449335634
+                  +1
                 </a>
               </div>
               <div>
