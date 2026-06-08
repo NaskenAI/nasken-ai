@@ -165,13 +165,13 @@ export default function Footer() {
 
         {/* Bottom strip */}
         <div className="mt-12 pt-8 border-t border-ink-800 flex flex-col md:flex-row justify-between gap-4 text-xs text-ink-400">
-          <p>
+          {/* <p>
             © {new Date().getFullYear()} Nasken AI Private Limited. All rights
             reserved. <span className="hidden md:inline">·</span>{" "}
             <span className="block md:inline mt-1 md:mt-0">
               CIN: U58200KA2026PTC218628
             </span>
-          </p>
+          </p> */}
           <div className="flex gap-5">
             <Link href="#" className="hover:text-white transition-colors">
               Privacy Policy
