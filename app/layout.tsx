@@ -18,23 +18,21 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Nasken AI — Medical AI for Hospitals, Clinics & Tomorrow's Engineers",
+  title: "Nasken AI — Medical AI for Hospitals & Clinics",
   description:
-    "Nasken AI builds intelligent healthcare software for hospitals and clinics, and trains the next generation of AI engineers through industry-grade programs and workshops.",
+    "Nasken AI builds intelligent healthcare software for hospitals and clinics.",
   keywords: [
     "Medical AI",
     "Healthcare AI",
     "Hospital AI",
     "Clinical AI",
-    "AI Training India",
-    "AI Workshops",
     "Nasken AI",
     "Karnataka AI",
   ],
   openGraph: {
     title: "Nasken AI — Medical AI for Hospitals & Clinics",
     description:
-      "Healthcare AI software and industry-grade AI training for students.",
+      "Nasken AI builds intelligent healthcare software for hospitals and clinics.",
     type: "website",
   },
 };

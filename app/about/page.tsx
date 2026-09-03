@@ -5,8 +5,6 @@ import {
   Brain,
   Layers,
   Stethoscope,
-  GraduationCap,
-  Building2,
   Sparkles,
   Cpu,
   Lock,
@@ -21,8 +19,6 @@ const offerings = [
   { icon: Brain, label: "Early-warning AI for ICU & NICU" },
   { icon: Layers, label: "Multimodal clinical data integration" },
   { icon: Stethoscope, label: "At-home diabetes wound monitoring" },
-  { icon: GraduationCap, label: "AI training programs for students" },
-  { icon: Building2, label: "AI workshops for schools & colleges" },
 ];
 
 const techPillars = [
@@ -118,9 +114,7 @@ export default function AboutPage() {
               <p>
                 We&apos;re an early-stage, pre-revenue startup backed by angel
                 investment, currently focused on core platform development,
-                pilot programs, and clinical partnerships. Alongside our
-                product work, we run training programs and workshops to help
-                build India&apos;s next generation of AI engineers.
+                pilot programs, and clinical partnerships.
               </p>
             </div>
           </div>
@@ -152,6 +146,8 @@ export default function AboutPage() {
       {/* What we offer */}
       <section className="py-16 md:py-20 bg-ink-50/40 border-y border-ink-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          {/* TODO: "From bedside to classroom." no longer matches this list now that
+              the training and workshop offerings are gone. Needs replacement copy. */}
           <div className="max-w-2xl mb-12">
             <p className="text-xs uppercase tracking-widest text-teal-600 font-semibold mb-4">
               What we offer
