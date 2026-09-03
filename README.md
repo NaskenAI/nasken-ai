@@ -1,6 +1,6 @@
 # Nasken AI — Official Website
 
-The official marketing website for **Nasken AI Private Limited** — a healthcare-AI company building Medical AI software for hospitals and clinics, and training the next generation of AI engineers.
+The official marketing website for **Nasken AI Private Limited** — a healthcare-AI company building post-discharge remote patient monitoring, and a toolkit that converts legacy clinical data into standards-conformant FHIR. Both are in active development.
 
 🌐 **Live**: [nasken.ai](https://nasken.ai)
 
@@ -29,11 +29,12 @@ nasken-ai/
 │   ├── page.tsx                # Home
 │   ├── globals.css             # Global styles + animations
 │   ├── about/page.tsx          # About
-│   └── contact/page.tsx        # Contact (smart form)
+│   ├── contact/page.tsx        # Contact (smart form)
+│   └── api/contact/route.ts    # Contact form POST handler (Resend)
 ├── components/
 │   ├── Navbar.tsx              # Sticky responsive nav
 │   ├── Footer.tsx              # Dark footer with social links
-│   ├── Hero.tsx                # Home hero + ICU monitor visual
+│   ├── Hero.tsx                # Home hero + check-in visual
 │   └── PageHeader.tsx          # Shared page header
 ├── public/                     # Static assets (add your logo here)
 ├── tailwind.config.ts          # Custom theme + animations
@@ -117,14 +118,22 @@ import Image from "next/image";
 Drop your logo file into `/public/logo.svg`.
 
 ### 3. Contact form backend
-The form currently shows a frontend-only success state. Wire it to a real backend:
+The form posts to `/api/contact`, which validates server-side and sends the
+message through [Resend](https://resend.com). Two environment variables are
+required — set them in `.env.local` locally and in the Vercel project settings
+for the deployed site:
 
-**Easy options:**
-- [Resend](https://resend.com) + a Next.js API route
-- [Formspree](https://formspree.io) (no backend needed)
-- [Web3Forms](https://web3forms.com)
+| Variable | Purpose |
+|---|---|
+| `RESEND_API_KEY` | Resend API key used to send the message |
+| `CONTACT_TO_EMAIL` | Inbox that receives contact form submissions |
 
-In `app/contact/page.tsx`, find `handleSubmit` and replace with a real `fetch()` call to your endpoint.
+Without both set the route returns a 500 and the form shows its error state,
+which tells the user to email `info@nasken.ai` directly. The `from` address in
+`app/api/contact/route.ts` must belong to a domain verified in Resend.
+
+The route also carries a honeypot field and best-effort in-memory per-IP rate
+limiting. There is no captcha.
 
 ### 4. Open Graph / Favicon
 - Add `/public/og-image.png` (1200×630) for social previews.
@@ -152,8 +161,8 @@ Add `app/privacy/page.tsx` and `app/terms/page.tsx`, then update the footer link
 
 | Route | Description |
 |---|---|
-| `/` | Landing page — Medical AI hero, focus areas, partner CTA |
-| `/about` | Company story, vision, offerings, technology pillars, leadership, recognitions |
+| `/` | Landing page — post-discharge RPM and FHIR interoperability, the two focus blocks, partner CTA |
+| `/about` | Company story, vision, what we're building, technology pillars, affiliations |
 | `/contact` | Smart contact form with subject-aware fields and dynamic placeholders |
 
 ---

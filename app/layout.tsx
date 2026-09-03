@@ -18,22 +18,36 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Nasken AI — Medical AI for Hospitals & Clinics",
+  metadataBase: new URL("https://www.nasken.ai"),
+  title: "Nasken AI — Post-discharge RPM & FHIR interoperability",
   description:
-    "Nasken AI builds intelligent healthcare software for hospitals and clinics.",
+    "Nasken AI is building remote patient monitoring for the period after discharge, and a toolkit that converts legacy clinical data into standards-conformant FHIR.",
   keywords: [
-    "Medical AI",
+    "Post-discharge RPM",
+    "Remote Patient Monitoring",
+    "FHIR",
+    "Health data interoperability",
+    "Diabetic foot ulcer",
     "Healthcare AI",
-    "Hospital AI",
-    "Clinical AI",
     "Nasken AI",
-    "Karnataka AI",
+    "Karnataka",
   ],
+  alternates: {
+    canonical: "https://www.nasken.ai",
+  },
   openGraph: {
-    title: "Nasken AI — Medical AI for Hospitals & Clinics",
+    title: "Nasken AI — Post-discharge RPM & FHIR interoperability",
     description:
-      "Nasken AI builds intelligent healthcare software for hospitals and clinics.",
+      "Nasken AI is building remote patient monitoring for the period after discharge, and a toolkit that converts legacy clinical data into standards-conformant FHIR.",
+    url: "https://www.nasken.ai",
+    siteName: "Nasken AI",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nasken AI — Post-discharge RPM & FHIR interoperability",
+    description:
+      "Nasken AI is building remote patient monitoring for the period after discharge, and a toolkit that converts legacy clinical data into standards-conformant FHIR.",
   },
 };
 

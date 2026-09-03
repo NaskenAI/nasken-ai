@@ -31,11 +31,9 @@ export default function Footer() {
               </span>
             </Link>
 
-            {/* TODO: This blurb still claims we train healthcare-AI engineers,
-                which is no longer offered. Needs replacement copy from marketing. */}
             <p className="mt-5 text-sm text-ink-300 leading-relaxed max-w-sm">
-              Building Medical AI software for hospitals and clinics, and
-              training the next generation of healthcare-AI engineers.
+              Building post-discharge remote patient monitoring, and a toolkit
+              that gets clinical data into FHIR.
             </p>
 
             <div className="mt-6 space-y-3 text-sm">

@@ -4,10 +4,11 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   Mail,
-  MapPin,
   Phone,
   Send,
   Check,
+  AlertCircle,
+  Loader2,
   Hospital,
   Briefcase,
   HelpCircle,
@@ -42,14 +43,25 @@ const subjectOptions = [
   },
 ];
 
+const GENERAL_SUBJECT = "general";
+
+function resolveSubject(param: string | null): string {
+  // No ?subject= at all: nothing preselected, submit stays disabled.
+  if (param === null) return "";
+  if (subjectOptions.some((s) => s.value === param)) return param;
+  // A value we no longer offer (old ?subject=training links from search
+  // caches and forwarded messages): fall back to the general enquiry so the
+  // form is usable immediately rather than landing in a dead state.
+  return GENERAL_SUBJECT;
+}
+
 function ContactForm() {
   const searchParams = useSearchParams();
-  const subjectParam = searchParams.get("subject") || "";
-  const initialSubject = subjectOptions.some((s) => s.value === subjectParam)
-    ? subjectParam
-    : "";
+  const initialSubject = resolveSubject(searchParams.get("subject"));
 
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const [subject, setSubject] = useState(initialSubject);
   const [form, setForm] = useState({
     fullName: "",
@@ -57,6 +69,7 @@ function ContactForm() {
     phone: "",
     organization: "",
     message: "",
+    website: "", // honeypot
   });
 
   useEffect(() => {
@@ -65,13 +78,65 @@ function ContactForm() {
     }
   }, [initialSubject]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Scrub a now-invalid ?subject= and any legacy ?program= out of the address
+  // bar. history.replaceState is used rather than router.replace because in
+  // the App Router router.replace re-runs the server render; this only edits
+  // the URL, with no navigation and no re-fetch.
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    let changed = false;
+
+    const raw = params.get("subject");
+    if (raw !== null && !subjectOptions.some((s) => s.value === raw)) {
+      params.delete("subject");
+      changed = true;
+    }
+    if (params.has("program")) {
+      params.delete("program");
+      changed = true;
+    }
+    if (!changed) return;
+
+    const query = params.toString();
+    window.history.replaceState(
+      null,
+      "",
+      query
+        ? `${window.location.pathname}?${query}`
+        : window.location.pathname
+    );
+  }, [searchParams]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Frontend-only success state (wire to your backend / email service later)
-    setSubmitted(true);
-    setTimeout(() => {
-      // Optional: reset after a few seconds
-    }, 100);
+    if (sending) return;
+
+    setSending(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subject, ...form }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setError(
+          data?.error ||
+            "Something went wrong sending your message."
+        );
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong sending your message.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const selectedOption = subjectOptions.find((s) => s.value === subject);
@@ -105,8 +170,10 @@ function ContactForm() {
               phone: "",
               organization: "",
               message: "",
+              website: "",
             });
             setSubject("");
+            setError("");
           }}
           className="mt-8 text-sm text-ink-500 hover:text-ink-700 underline underline-offset-2"
         >
@@ -119,7 +186,7 @@ function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-2xl mx-auto bg-white border border-ink-100 rounded-3xl p-8 md:p-10 shadow-sm"
+      className="relative max-w-2xl mx-auto bg-white border border-ink-100 rounded-3xl p-8 md:p-10 shadow-sm"
     >
       {/* Subject pills */}
       <div className="mb-8">
@@ -235,6 +302,43 @@ function ContactForm() {
         </div>
       </div>
 
+      {/* Honeypot — hidden from people, tempting to bots. */}
+      <div className="absolute left-[-9999px] top-0 h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form.website}
+          onChange={(e) => setForm({ ...form, website: e.target.value })}
+        />
+      </div>
+
+      {error && (
+        <div
+          role="alert"
+          className="mt-7 flex items-start gap-3 p-4 rounded-xl border border-coral-200 bg-coral-50"
+        >
+          <AlertCircle
+            size={16}
+            className="text-coral-500 mt-0.5 shrink-0"
+            strokeWidth={2}
+          />
+          <p className="text-sm text-ink-700 leading-relaxed">
+            {error} Please email us directly at{" "}
+            <a
+              href="mailto:info@nasken.ai"
+              className="text-teal-600 hover:text-teal-700 underline underline-offset-2"
+            >
+              info@nasken.ai
+            </a>
+            .
+          </p>
+        </div>
+      )}
+
       <div className="mt-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-ink-100">
         <p className="text-xs text-ink-500 leading-relaxed max-w-xs">
           By submitting, you agree to our{" "}
@@ -245,14 +349,24 @@ function ContactForm() {
         </p>
         <button
           type="submit"
-          disabled={!subject || !form.fullName || !form.email || !form.message}
+          disabled={
+            sending ||
+            !subject ||
+            !form.fullName ||
+            !form.email ||
+            !form.message
+          }
           className="group inline-flex items-center justify-center gap-2 bg-ink text-white px-7 py-3.5 rounded-full text-sm font-medium hover:bg-ink-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          Send message
-          <Send
-            size={14}
-            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-          />
+          {sending ? "Sending…" : "Send message"}
+          {sending ? (
+            <Loader2 size={14} className="animate-spin" />
+          ) : (
+            <Send
+              size={14}
+              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+            />
+          )}
         </button>
       </div>
     </form>
@@ -342,34 +456,8 @@ export default function ContactPage() {
       {/* Office info */}
       <section className="py-16 md:py-24 bg-ink-50/40 border-t border-ink-100">
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
-          <div className="text-center mb-10">
-            <p className="text-xs uppercase tracking-widest text-teal-600 font-semibold mb-3">
-              Visit us
-            </p>
-            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-ink leading-[1.15] text-balance">
-              Our office
-            </h2>
-          </div>
-
           <div className="bg-white border border-ink-100 rounded-3xl p-8 md:p-10">
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* <div>
-                <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center mb-4">
-                  <MapPin size={18} className="text-teal-600" strokeWidth={1.8} />
-                </div>
-                <p className="text-xs uppercase tracking-widest text-ink-500 font-semibold mb-2">
-                  Address
-                </p>
-                <address className="not-italic text-sm text-ink-700 leading-relaxed">
-                  #2880, Someshwara Nilaya,
-                  <br />
-                  Behind Saptagiri PU College,
-                  <br />
-                  Saptagiri Extension, Tumkur,
-                  <br />
-                  Karnataka, India — 572102
-                </address>
-              </div> */}
+            <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center mb-4">
                   <Phone size={18} className="text-teal-600" strokeWidth={1.8} />
@@ -381,7 +469,7 @@ export default function ContactPage() {
                   href="tel:+919449335634"
                   className="text-sm text-ink-700 hover:text-teal-600 transition-colors"
                 >
-                  +1
+                  +91 94493 35634
                 </a>
               </div>
               <div>
