@@ -8,8 +8,6 @@ import {
   Stethoscope,
   ShieldCheck,
   ArrowRight,
-  GraduationCap,
-  Building2,
 } from "lucide-react";
 
 const focusAreas = [
@@ -112,46 +110,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Two-track section */}
-      <section className="py-24 md:py-32 bg-gradient-to-b from-white to-ink-50/40">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-xs uppercase tracking-widest text-teal-600 font-semibold mb-4">
-              Two missions, one company
-            </p>
-            <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight text-ink leading-[1.1] text-balance">
-              Building products. Building people.
-            </h2>
-            <p className="mt-5 text-lg text-ink-500 leading-relaxed">
-              Alongside our healthcare-AI products, we run training programs
-              and workshops — bringing industry-grade AI education to college
-              and PUC students across India.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-5">
-            <TrackCard
-              icon={GraduationCap}
-              eyebrow="For students"
-              title="3-Month AI Training Programs"
-              description="Industry-grade AI training in Prompt Engineering, Applied ML, and Generative AI — taught by engineers from Meta, Oracle, and global tech companies."
-              href="/training"
-              cta="Explore programs"
-              variant="teal"
-            />
-            <TrackCard
-              icon={Building2}
-              eyebrow="For institutions"
-              title="AI Workshops for Schools & Colleges"
-              description="Hands-on, instructor-led AI workshops for schools, PUCs, and engineering colleges — customised to your audience and goals."
-              href="/workshops"
-              cta="See workshops"
-              variant="coral"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Closing CTA */}
       <section className="py-24 md:py-32">
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
@@ -160,6 +118,8 @@ export default function HomePage() {
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-teal-500/15 blur-3xl rounded-full" />
             <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-coral-400/10 blur-3xl rounded-full" />
 
+            {/* TODO: This heading still offers to solve "a training need", and the
+                paragraph still addresses "a college". Needs replacement copy from marketing. */}
             <div className="relative max-w-2xl">
               <p className="text-xs uppercase tracking-widest text-teal-400 font-semibold mb-5">
                 Partner with us
@@ -227,72 +187,5 @@ function FocusCard({
         <p className="text-sm text-ink-500 leading-relaxed">{description}</p>
       </div>
     </div>
-  );
-}
-
-function TrackCard({
-  icon: Icon,
-  eyebrow,
-  title,
-  description,
-  href,
-  cta,
-  variant,
-}: {
-  icon: any;
-  eyebrow: string;
-  title: string;
-  description: string;
-  href: string;
-  cta: string;
-  variant: "teal" | "coral";
-}) {
-  const styles =
-    variant === "teal"
-      ? {
-          gradient: "from-teal-500 to-teal-700",
-          glow: "bg-teal-500/20",
-          accent: "text-teal-200",
-          hover: "hover:bg-teal-50",
-        }
-      : {
-          gradient: "from-ink-900 to-ink-950",
-          glow: "bg-coral-400/20",
-          accent: "text-coral-300",
-          hover: "hover:bg-coral-50",
-        };
-
-  return (
-    <Link
-      href={href}
-      className={`group relative overflow-hidden rounded-3xl p-10 bg-gradient-to-br ${styles.gradient} text-white transition-transform hover:-translate-y-1 noise-overlay`}
-    >
-      <div
-        className={`absolute -top-20 -right-20 w-72 h-72 ${styles.glow} blur-3xl rounded-full`}
-      />
-      <div className="relative">
-        <div className="flex items-center gap-2 mb-8">
-          <Icon size={18} className={styles.accent} strokeWidth={1.8} />
-          <span
-            className={`text-xs uppercase tracking-widest font-semibold ${styles.accent}`}
-          >
-            {eyebrow}
-          </span>
-        </div>
-        <h3 className="font-display text-3xl md:text-4xl font-medium tracking-tight leading-[1.1] mb-4 text-balance">
-          {title}
-        </h3>
-        <p className="text-base text-white/70 leading-relaxed mb-8 max-w-md">
-          {description}
-        </p>
-        <div className="inline-flex items-center gap-2 text-sm font-medium border-b border-white/30 pb-1 group-hover:border-white transition-colors">
-          {cta}
-          <ArrowRight
-            size={14}
-            className="group-hover:translate-x-1 transition-transform"
-          />
-        </div>
-      </div>
-    </Link>
   );
 }

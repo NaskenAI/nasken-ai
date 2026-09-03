@@ -2,7 +2,7 @@
 
 The official marketing website for **Nasken AI Private Limited** — a healthcare-AI company building Medical AI software for hospitals and clinics, and training the next generation of AI engineers.
 
-🌐 **Live**: [nasken.ai](https://nasken.ai) _(once deployed)_
+🌐 **Live**: [nasken.ai](https://nasken.ai)
 
 Built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, and **Lucide icons**. Designed to deploy in one click on **Vercel**.
 
@@ -29,8 +29,6 @@ nasken-ai/
 │   ├── page.tsx                # Home
 │   ├── globals.css             # Global styles + animations
 │   ├── about/page.tsx          # About
-│   ├── training/page.tsx       # Training programs
-│   ├── workshops/page.tsx      # Workshops
 │   └── contact/page.tsx        # Contact (smart form)
 ├── components/
 │   ├── Navbar.tsx              # Sticky responsive nav
@@ -52,7 +50,7 @@ nasken-ai/
 ### 1. Clone & install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/nasken-ai.git
+git clone https://github.com/NaskenAI/nasken-ai.git
 cd nasken-ai
 npm install
 ```
@@ -154,10 +152,8 @@ Add `app/privacy/page.tsx` and `app/terms/page.tsx`, then update the footer link
 
 | Route | Description |
 |---|---|
-| `/` | Landing page — Medical AI hero, focus areas, training/workshops teaser, partner CTA |
+| `/` | Landing page — Medical AI hero, focus areas, partner CTA |
 | `/about` | Company story, vision, offerings, technology pillars, leadership, recognitions |
-| `/training` | 3-month AI training programs with details, audiences, curriculum, fees CTA |
-| `/workshops` | School / PUC / college workshop offerings, what's included, request a proposal |
 | `/contact` | Smart contact form with subject-aware fields and dynamic placeholders |
 
 ---
@@ -167,7 +163,6 @@ Add `app/privacy/page.tsx` and `app/terms/page.tsx`, then update the footer link
 - All pages are **fully responsive** (mobile, tablet, desktop).
 - Uses Next.js **App Router** (server components by default; `"use client"` where needed).
 - Custom animations defined in `tailwind.config.ts` and `app/globals.css`.
-- Smart contact page reads `?subject=training` or `?subject=workshops` from URL params (CTAs on training/workshop pages auto-fill).
 
 ---
 

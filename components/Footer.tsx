@@ -31,6 +31,8 @@ export default function Footer() {
               </span>
             </Link>
 
+            {/* TODO: This blurb still claims we train healthcare-AI engineers,
+                which is no longer offered. Needs replacement copy from marketing. */}
             <p className="mt-5 text-sm text-ink-300 leading-relaxed max-w-sm">
               Building Medical AI software for hospitals and clinics, and
               training the next generation of healthcare-AI engineers.
@@ -56,7 +58,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-4">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-ink-400 mb-4">
               Explore
             </h4>
@@ -64,8 +66,6 @@ export default function Footer() {
               {[
                 { href: "/", label: "Home" },
                 { href: "/about", label: "About" },
-                { href: "/training", label: "Training" },
-                { href: "/workshops", label: "Workshops" },
                 { href: "/contact", label: "Contact" },
               ].map((l) => (
                 <li key={l.href}>
@@ -80,49 +80,8 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Programs */}
-          <div className="md:col-span-3">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-ink-400 mb-4">
-              Programs
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link
-                  href="/training"
-                  className="text-ink-300 hover:text-white transition-colors"
-                >
-                  AI &amp; Prompt Engineering
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/training"
-                  className="text-ink-300 hover:text-white transition-colors"
-                >
-                  Applied Machine Learning
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/training"
-                  className="text-ink-300 hover:text-white transition-colors"
-                >
-                  Generative AI &amp; LLM Apps
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/workshops"
-                  className="text-ink-300 hover:text-white transition-colors"
-                >
-                  School / College Workshops
-                </Link>
-              </li>
-            </ul>
-          </div>
-
           {/* Connect */}
-          <div className="md:col-span-3">
+          <div className="md:col-span-4">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-ink-400 mb-4">
               Connect
             </h4>

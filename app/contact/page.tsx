@@ -8,8 +8,6 @@ import {
   Phone,
   Send,
   Check,
-  GraduationCap,
-  Building2,
   Hospital,
   Briefcase,
   HelpCircle,
@@ -17,19 +15,6 @@ import {
 } from "lucide-react";
 
 const subjectOptions = [
-  {
-    value: "training",
-    label: "AI Training Programs (3-month)",
-    icon: GraduationCap,
-    description: "I want to enrol or learn more about your training programs.",
-  },
-  {
-    value: "workshops",
-    label: "AI Workshops for our Institution",
-    icon: Building2,
-    description:
-      "We're a school, PUC, or college interested in conducting a workshop.",
-  },
   {
     value: "healthcare",
     label: "Healthcare AI / Pilot Partnership",
@@ -59,8 +44,10 @@ const subjectOptions = [
 
 function ContactForm() {
   const searchParams = useSearchParams();
-  const initialSubject = searchParams.get("subject") || "";
-  const initialProgram = searchParams.get("program") || "";
+  const subjectParam = searchParams.get("subject") || "";
+  const initialSubject = subjectOptions.some((s) => s.value === subjectParam)
+    ? subjectParam
+    : "";
 
   const [submitted, setSubmitted] = useState(false);
   const [subject, setSubject] = useState(initialSubject);
@@ -69,11 +56,11 @@ function ContactForm() {
     email: "",
     phone: "",
     organization: "",
-    message: initialProgram ? `Interested in: ${initialProgram}\n\n` : "",
+    message: "",
   });
 
   useEffect(() => {
-    if (initialSubject && subjectOptions.find((s) => s.value === initialSubject)) {
+    if (initialSubject) {
       setSubject(initialSubject);
     }
   }, [initialSubject]);
@@ -214,20 +201,14 @@ function ContactForm() {
           />
           <Field
             label={
-              subject === "workshops"
-                ? "Institution / Organisation"
-                : subject === "healthcare"
+              subject === "healthcare"
                 ? "Hospital / Clinic"
-                : subject === "training"
-                ? "College / School (optional)"
                 : "Organisation (optional)"
             }
             value={form.organization}
             onChange={(v) => setForm({ ...form, organization: v })}
             placeholder={
-              subject === "workshops"
-                ? "Your school or college"
-                : subject === "healthcare"
+              subject === "healthcare"
                 ? "Your hospital or clinic"
                 : "Where you work or study"
             }
@@ -244,11 +225,7 @@ function ContactForm() {
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             placeholder={
-              subject === "training"
-                ? "Tell us which program you're interested in, your background, and any questions you have."
-                : subject === "workshops"
-                ? "Tell us about your institution, audience size, preferred dates, and topics of interest."
-                : subject === "healthcare"
+              subject === "healthcare"
                 ? "Tell us about your organisation and how you'd like to collaborate."
                 : "Tell us how we can help."
             }
