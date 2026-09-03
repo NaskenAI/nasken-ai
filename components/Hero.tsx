@@ -19,19 +19,19 @@ export default function Hero() {
                 <span className="absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75 animate-ping" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500" />
               </span>
-              Healthcare AI · Karnataka, India
+              Healthcare AI · Karnataka, India · In development
             </div>
 
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-ink leading-[1.02] text-balance">
-              Medical AI{" "}
-              <span className="italic text-teal-600">software</span> for
-              hospitals &amp; clinics.
+              Post-discharge{" "}
+              <span className="italic text-teal-600">monitoring</span>, and the
+              data plumbing behind it.
             </h1>
 
             <p className="mt-7 text-lg md:text-xl text-ink-500 leading-relaxed max-w-lg">
-              Nasken AI builds intelligent healthcare platforms that combine
-              machine learning, predictive analytics, and secure data systems —
-              with privacy and responsible AI at the core.
+              Nasken AI is building two things: remote patient monitoring for
+              the weeks after a patient goes home, and a toolkit that gets
+              clinical data into FHIR so systems can actually exchange it.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3">
@@ -53,32 +53,15 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* Quick stats */}
-            <div className="mt-14 grid grid-cols-3 gap-6 pt-8 border-t border-ink-100">
-              <div>
-                <p className="font-display text-2xl text-ink font-medium">
-                  HIPAA
-                </p>
-                <p className="text-xs text-ink-500 mt-1">Aligned pipelines</p>
-              </div>
-              <div>
-                <p className="font-display text-2xl text-ink font-medium">
-                  NVIDIA
-                </p>
-                <p className="text-xs text-ink-500 mt-1">Inception member</p>
-              </div>
-              <div>
-                <p className="font-display text-2xl text-ink font-medium">
-                  IEEE
-                </p>
-                <p className="text-xs text-ink-500 mt-1">Senior member</p>
-              </div>
+            {/* Affiliation */}
+            <div className="mt-14 pt-8 border-t border-ink-100">
+              <p className="text-xs text-ink-500">NVIDIA Inception member</p>
             </div>
           </div>
 
-          {/* Right: ICU monitor visual */}
+          {/* Right: check-in visual */}
           <div className="relative">
-            <ICUMonitorVisual />
+            <CheckInVisual />
           </div>
         </div>
       </div>
@@ -86,7 +69,7 @@ export default function Hero() {
   );
 }
 
-function ICUMonitorVisual() {
+function CheckInVisual() {
   return (
     <div className="relative">
       {/* Background card */}
@@ -103,19 +86,16 @@ function ICUMonitorVisual() {
                 <Activity size={16} className="text-teal-600" />
               </div>
               <div>
-                <p className="text-xs uppercase tracking-wider text-ink-400 font-medium">
-                  Live · ICU
-                </p>
                 <p className="text-sm font-medium text-ink">
-                  Predictive Monitor
+                  Post-discharge check-in
                 </p>
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-50 border border-teal-100">
-            <div className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse-soft" />
-            <span className="text-[10px] uppercase tracking-wider font-semibold text-teal-700">
-              Stable
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-ink-50 border border-ink-100">
+            <div className="w-1.5 h-1.5 rounded-full bg-ink-300 animate-pulse-soft" />
+            <span className="text-[10px] uppercase tracking-wider font-semibold text-ink-500">
+              Illustrative — not clinical data
             </span>
           </div>
         </div>
@@ -153,24 +133,6 @@ function ICUMonitorVisual() {
           <VitalCard label="Resp. Rate" value="16" unit="/min" trend="stable" />
           <VitalCard label="Temp" value="98.4" unit="°F" trend="stable" />
         </div>
-
-        {/* Risk score */}
-        <div className="mt-5 p-4 rounded-xl bg-gradient-to-r from-ink-50 to-teal-50/50 border border-ink-100">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-medium text-ink-700">
-              Deterioration Risk · 6h forecast
-            </span>
-            <span className="text-xs font-mono text-teal-700 font-semibold">
-              LOW · 0.08
-            </span>
-          </div>
-          <div className="h-1.5 bg-ink-100 rounded-full overflow-hidden">
-            <div className="h-full w-[8%] bg-gradient-to-r from-teal-400 to-teal-600 rounded-full" />
-          </div>
-          <p className="text-[11px] text-ink-500 mt-2">
-            Multimodal fusion · 12 signals · 30s window
-          </p>
-        </div>
       </div>
 
       {/* Floating mini badge */}
@@ -178,11 +140,11 @@ function ICUMonitorVisual() {
         <div className="flex items-center gap-2 mb-1">
           <div className="w-2 h-2 rounded-full bg-coral-400" />
           <span className="text-[10px] uppercase tracking-wider font-semibold text-ink-500">
-            Early warning
+            Day 12 after discharge
           </span>
         </div>
         <p className="text-xs text-ink-700 leading-snug">
-          Models surface risk hours before standard scoring systems.
+          Recovery tracked at home, reviewed by the care team.
         </p>
       </div>
     </div>

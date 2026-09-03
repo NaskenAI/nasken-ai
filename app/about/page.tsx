@@ -1,6 +1,5 @@
 import PageHeader from "@/components/PageHeader";
 import {
-  Hospital,
   HeartPulse,
   Brain,
   Layers,
@@ -14,11 +13,16 @@ import {
 } from "lucide-react";
 
 const offerings = [
-  { icon: Hospital, label: "Hospital-at-Home telehealth platforms" },
-  { icon: HeartPulse, label: "Predictive Remote Patient Monitoring (RPM)" },
-  { icon: Brain, label: "Early-warning AI for ICU & NICU" },
-  { icon: Layers, label: "Multimodal clinical data integration" },
-  { icon: Stethoscope, label: "At-home diabetes wound monitoring" },
+  {
+    icon: Stethoscope,
+    label: "At-home wound assessment for diabetic foot ulcers",
+  },
+  { icon: HeartPulse, label: "Structured post-discharge recovery tracking" },
+  {
+    icon: Layers,
+    label: "Legacy clinical data to FHIR conversion and validation",
+  },
+  { icon: Brain, label: "Terminology mapping and data-quality reporting" },
 ];
 
 const techPillars = [
@@ -32,19 +36,19 @@ const techPillars = [
     icon: Sparkles,
     title: "Clinical decision support",
     description:
-      "Applied ML for predictive analytics that helps clinicians intervene earlier and more accurately.",
+      "Applied ML for wound assessment and recovery tracking, built to support a clinician's judgement rather than replace it.",
   },
   {
     icon: Lock,
     title: "Secure by design",
     description:
-      "HIPAA-aligned data systems with auditable AI pipelines and consent-first design patterns.",
+      "Consent capture, audit logging, and data minimisation built in from the first commit rather than added later.",
   },
   {
     icon: Layers,
-    title: "Multimodal fusion",
+    title: "Standards-first data",
     description:
-      "Combining vital signs, imaging, and behavioural signals for a richer view of patient state.",
+      "FHIR R4 as the target format, with conformance validation and terminology mapping treated as first-class problems.",
   },
   {
     icon: Eye,
@@ -63,7 +67,7 @@ const techPillars = [
 const recognitions = [
   {
     name: "NVIDIA Inception Program",
-    description: "Member — recognising Nasken's innovation in AI.",
+    description: "Member of NVIDIA's startup programme.",
   },
 ];
 
@@ -105,11 +109,12 @@ export default function AboutPage() {
                 and academic collaboration operations.
               </p>
               <p>
-                We build software that combines machine learning, predictive
-                analytics, and secure data systems to solve real-world clinical
-                challenges — not theoretical ones. Every platform we ship is
-                designed with privacy, consent, and auditability at its core,
-                aligned with global healthcare compliance standards.
+                We&apos;re building two things: remote patient monitoring for
+                the period after discharge, and a toolkit that converts legacy
+                clinical data into standards-conformant FHIR. Both are in
+                active development. Consent, auditability, and data
+                minimisation are design constraints from the start rather than
+                retrofits.
               </p>
               <p>
                 We&apos;re an early-stage, pre-revenue startup backed by angel
@@ -146,15 +151,13 @@ export default function AboutPage() {
       {/* What we offer */}
       <section className="py-16 md:py-20 bg-ink-50/40 border-y border-ink-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          {/* TODO: "From bedside to classroom." no longer matches this list now that
-              the training and workshop offerings are gone. Needs replacement copy. */}
           <div className="max-w-2xl mb-12">
             <p className="text-xs uppercase tracking-widest text-teal-600 font-semibold mb-4">
               What we offer
             </p>
             <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight text-ink leading-[1.1] text-balance">
-              From bedside to{" "}
-              <span className="italic text-teal-600">classroom.</span>
+              Two things, in{" "}
+              <span className="italic text-teal-600">development.</span>
             </h2>
           </div>
 
@@ -212,30 +215,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership */}
-      <section className="py-16 md:py-20 bg-ink-50/40 border-y border-ink-100">
-        <div className="max-w-5xl mx-auto px-6 lg:px-10">
-          <div className="mb-10">
-            <p className="text-xs uppercase tracking-widest text-teal-600 font-semibold mb-4">
-              Leadership
-            </p>
-            <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight text-ink leading-[1.1] text-balance">
-              Built by engineers who&apos;ve shipped at scale.
-            </h2>
-          </div>
-        </div>
-      </section>
-
       {/* Recognitions */}
       <section className="py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="max-w-2xl mb-12">
-            <p className="text-xs uppercase tracking-widest text-teal-600 font-semibold mb-4">
-              Recognitions &amp; affiliations
-            </p>
             <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight text-ink leading-[1.1] text-balance">
-              Recognised by the people we want to be{" "}
-              <span className="italic text-teal-600">recognised by.</span>
+              Affiliations
             </h2>
           </div>
 
